@@ -82,8 +82,6 @@
   }
 
   .nav-inner{
-    max-width:1180px;
-    margin:0 auto;
     padding:18px 32px;
     display:flex;
     align-items:center;
@@ -141,71 +139,52 @@
 
   /* ===== Hero ===== */
   .hero{
-    min-height:100vh;
-    display:grid;
-    grid-template-columns:1.1fr 1fr;
-    align-items:stretch;
-  }
-
-  .hero-text{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:140px 5vw 80px 5vw;
     position:relative;
+    min-height:100vh;
+    overflow:hidden;
   }
 
-  .hero-kicker{
-    font-size:12px;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:28px;
+  .hero-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
   }
 
-  .hero-kicker span{color:var(--gold);}
+  .hero-image img{
+    width:100%;height:100%;
+    object-fit:cover;
+    filter:grayscale(0.05) contrast(1.03);
+  }
+
+  .hero-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(14,13,12,0.35) 0%, rgba(14,13,12,0) 22%, rgba(14,13,12,0) 60%, rgba(14,13,12,0.55) 100%);
+  }
 
   .hero-title{
-    font-size:clamp(52px,8vw,108px);
-    line-height:1.05;
+    position:absolute;
+    bottom:32px;
+    left:32px;
+    z-index:2;
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
     font-weight:500;
     color:var(--paper);
-    letter-spacing:0.01em;
+    text-shadow:0 1px 6px rgba(0,0,0,0.4);
+    line-height:1.6;
   }
 
   .hero-title em{
-    font-style:italic;
+    font-style:normal;
     color:var(--gold);
   }
 
-  .hero-role{
-    font-family:var(--display);
-    font-size:clamp(18px,2vw,22px);
-    font-style:italic;
-    color:var(--muted);
-    margin-bottom:40px;
-  }
-
-  .hero-role .div{
-    color:var(--rose);
-    margin:0 10px;
-    font-style:normal;
-  }
-
-  .hero-credits{
-    font-size:13.5px;
-    color:var(--muted-2);
-    max-width:420px;
-    line-height:1.8;
-    margin-bottom:40px;
-    border-top:1px solid var(--line);
-    padding-top:24px;
-  }
-
-  .hero-cta{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
+  @media (max-width:640px){
+    .hero-title{bottom:22px;left:22px;font-size:11.5px;}
   }
 
   .btn{
@@ -219,6 +198,9 @@
     border:1px solid var(--gold-dim);
     color:var(--paper);
     transition:all .25s;
+    background:none;
+    cursor:pointer;
+    font-family:var(--body);
   }
 
   .btn:hover{
@@ -236,30 +218,6 @@
   .btn.solid:hover{
     background:transparent;
     color:var(--gold);
-  }
-
-  .hero-image{
-    position:relative;
-    overflow:hidden;
-  }
-
-  .hero-image img{
-    width:100%;height:100%;
-    object-fit:cover;
-    filter:grayscale(0.08) contrast(1.05);
-  }
-
-  .hero-image::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(100deg, var(--ink) 0%, transparent 18%);
-  }
-
-  @media (max-width:880px){
-    .hero{grid-template-columns:1fr;grid-template-rows:auto auto;}
-    .hero-image{height:56vh;order:-1;}
-    .hero-text{padding:120px 6vw 60px;}
   }
 
   /* ===== Section scaffolding ===== */
@@ -434,19 +392,26 @@
     border-top:1px solid var(--line);
   }
 
+  .work-item{
+    border-bottom:1px solid var(--line-soft);
+  }
+
   .work-row{
     display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:24px;
+    grid-template-columns:1fr auto auto auto;
+    gap:20px;
     align-items:baseline;
     padding:15px 0;
-    border-bottom:1px solid var(--line-soft);
     font-size:15px;
     transition:padding-left .2s;
+    cursor:pointer;
   }
 
   .work-row:hover{
     padding-left:8px;
+  }
+
+  .work-item:has(.work-row:hover){
     border-bottom-color:var(--gold-dim);
   }
 
@@ -472,9 +437,121 @@
 
   .work-row .link:hover{color:var(--rose);}
 
+  .work-toggle{
+    width:22px;
+    height:22px;
+    border:1px solid var(--gold-dim);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:13px;
+    line-height:1;
+    flex-shrink:0;
+    transition:transform .25s, background .2s;
+  }
+
+  .work-item.open .work-toggle{
+    transform:rotate(45deg);
+    background:var(--gold);
+    color:var(--ink);
+  }
+
+  .work-details{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+
+  .work-item.open .work-details{
+    max-height:600px;
+  }
+
+  .work-details-inner{
+    padding:4px 0 26px;
+    display:grid;
+    grid-template-columns:repeat(3, auto);
+    gap:8px 36px;
+    font-size:13px;
+  }
+
+  .work-detail-field{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+
+  .work-detail-field .lbl{
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--rose);
+  }
+
+  .work-detail-field .val{
+    color:#cfc9bd;
+    line-height:1.5;
+  }
+
+  .work-statement{
+    grid-column:1/-1;
+    margin-top:6px;
+    padding-top:14px;
+    border-top:1px solid var(--line-soft);
+    color:#cfc9bd;
+    font-size:13.5px;
+    line-height:1.75;
+    font-style:italic;
+    max-width:680px;
+  }
+
+  .work-listen-link{
+    grid-column:1/-1;
+    margin-top:4px;
+  }
+
+  .work-listen-link a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--gold);
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--gold-dim);
+    padding:8px 16px;
+    border-radius:999px;
+    transition:all .2s;
+  }
+
+  .work-listen-link a::before{
+    content:"";
+    width:0;
+    height:0;
+    border-style:solid;
+    border-width:4px 0 4px 6px;
+    border-color:transparent transparent transparent var(--gold);
+    transition:border-color .2s;
+  }
+
+  .work-listen-link a:hover{
+    background:var(--gold);
+    color:var(--ink);
+    border-color:var(--gold);
+  }
+
+  .work-listen-link a:hover::before{
+    border-left-color:var(--ink);
+  }
+
   @media (max-width:640px){
-    .work-row{grid-template-columns:1fr;gap:4px;padding:18px 0;}
-    .work-row .link{justify-self:start;}
+    .work-row{grid-template-columns:1fr auto;gap:6px;padding:18px 0;}
+    .work-row .meta{grid-column:1;order:2;}
+    .work-row .link{grid-column:1;order:3;justify-self:start;}
+    .work-row .title{grid-column:1/-1;}
+    .work-row .work-toggle{grid-row:1;grid-column:2;}
+    .work-details-inner{grid-template-columns:1fr 1fr;}
   }
 
   /* Discography cards */
@@ -526,14 +603,39 @@
   }
 
   .disc-card .listen{
-    font-size:11.5px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
     letter-spacing:0.1em;
     text-transform:uppercase;
     color:var(--gold);
+    border:1px solid var(--gold-dim);
+    padding:8px 16px;
+    border-radius:999px;
     margin-top:auto;
+    align-self:flex-start;
+    transition:all .2s;
   }
 
-  .disc-card .listen:hover{color:var(--rose);}
+  .disc-card .listen::before{
+    content:"";
+    width:0;
+    height:0;
+    border-style:solid;
+    border-width:4px 0 4px 6px;
+    border-color:transparent transparent transparent var(--gold);
+    transition:border-color .2s;
+  }
+
+  .disc-card .listen:hover{
+    background:var(--gold);
+    color:var(--ink);
+  }
+
+  .disc-card .listen:hover::before{
+    border-left-color:var(--ink);
+  }
 
   @media (max-width:880px){
     .disc-grid{grid-template-columns:repeat(2,1fr);}
@@ -581,6 +683,17 @@
     font-size:12.5px;
     color:var(--muted-2);
   }
+
+  .t-body .evlink{
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-top:6px;
+    display:inline-block;
+  }
+
+  .t-body .evlink:hover{color:var(--rose);}
 
   .t-row.collapsed{display:none;}
 
@@ -979,9 +1092,7 @@
 </header>
 
 <section class="hero" id="home" style="border-bottom:none;padding:0;">
-  <div class="hero-text">
-    <h1 class="hero-title">Composer<br><em>Pianist</em></h1>
-  </div>
+  <div class="hero-title">Composer <em>·</em> Pianist</div>
   <div class="hero-image">
     <img src="hero.jpg" alt="Mahdis Golzar Kashani">
   </div>
@@ -1010,7 +1121,7 @@
         <div class="awards-list" id="awardsList">
           <div class="award-row">
             <div class="yr">2023</div>
-            <div class="what"><em>Heart Snatcher</em> · Duet Soprano & Piano — International Expressions Composition Competition</div>
+            <div class="what"><em>Heart Snatcher</em> · Duet Soprano & Piano — Opera Contempo Composition Competition</div>
             <div class="loc">USA</div>
           </div>
           <div class="award-row">
@@ -1040,7 +1151,7 @@
           </div>
           <div class="award-row">
             <div class="yr">2014</div>
-            <div class="what"><em>Battle of Zahhak and Fereydoun</em> · Full Orchestra — Epic Persia / Orient Occident Competition</div>
+            <div class="what"><em>Battle of Zahhak and Fereydoun</em> · Full Orchestra — Epic Persia Competition</div>
             <div class="loc">England</div>
           </div>
           <div class="award-row">
@@ -1077,50 +1188,409 @@
       <div class="work-group">
         <h3>Chamber Works</h3>
         <div class="work-list">
-          <div class="work-row"><div class="title">A Deep Breath Between Two Bullets</div><div class="meta">2025 · Quartet</div><div class="link"><a href="https://hoolanensemble.com/divided-nations" target="_blank" rel="noopener">Details ↗</a></div></div>
-          <div class="work-row"><div class="title">To the Pointer Stars</div><div class="meta">2024 · Piano Trio</div><div class="link"><a href="https://www.fraenkischer-sommer.de/1e590abb-c13f-143e-35e2-8e8a68c71910" target="_blank" rel="noopener">Details ↗</a></div></div>
-          <div class="work-row"><div class="title">Let It Remain for Liberation Day</div><div class="meta">2022 · Quintet</div></div>
-          <div class="work-row"><div class="title">The Phoenix</div><div class="meta">2020 · Song Cycle, Quintet</div></div>
-          <div class="work-row"><div class="title">And the Moses Drowned</div><div class="meta">2017 · String Quartet</div><div class="link"><a href="https://soundcloud.com/mahdis-golzar-kashani/and-the-moses-drowned" target="_blank" rel="noopener">Listen ↗</a></div></div>
-          <div class="work-row"><div class="title">Heaven Has No Other Prayer Niche but Love</div><div class="meta">2018 · Quartet</div></div>
-          <div class="work-row"><div class="title">This Is Crime</div><div class="meta">2017 · Sextet</div></div>
-          <div class="work-row"><div class="title">Fight &amp; Feast</div><div class="meta">2017 · Septet</div></div>
-          <div class="work-row"><div class="title">The Little Black Fish</div><div class="meta">2016 · Quintet</div><div class="link"><a href="https://soundcloud.com/haftcraftensemble/sets/little-black-fish-1" target="_blank" rel="noopener">Listen ↗</a></div></div>
-          <div class="work-row"><div class="title">The Cat's Suffering</div><div class="meta">2020 · Piano Trio</div></div>
-          <div class="work-row"><div class="title">Heart Snatcher</div><div class="meta">2016 · Duet, Soprano &amp; Piano</div></div>
-          <div class="work-row"><div class="title">In a Corner of Endurance</div><div class="meta">2013 · Duet</div></div>
-          <div class="work-row"><div class="title">Torrent of Turmoil</div><div class="meta">2022 · String Quartet</div></div>
-          <div class="work-row"><div class="title">Flight of a Captive</div><div class="meta">2015 · Duet</div></div>
-          <div class="work-row"><div class="title">Chasing the Wind</div><div class="meta">2018 · Chamber Ensemble</div></div>
-          <div class="work-row"><div class="title">Concerto for Clarinet and Ensemble</div><div class="meta">2014 · Septet</div></div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">A Deep Breath Between Two Bullets</div>
+              <div class="meta">2025 · Quartet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Flute, Oboe, Clarinet, Acoustic Guitar</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">7'</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Hoolan Ensemble, 2025</div></div>
+              <div class="work-statement">In societies where dictatorships take hold, atomization of the community becomes a key instrument of oppression. By dismantling social interactions, silencing independent voices, and weakening the sense of collective responsibility, people are turned into isolated and scattered fragments, unable to listen to or empathize with one another. In such an environment, enforced individualism replaces solidarity, paving the way for absolute domination.</div>
+              <div class="work-listen-link"><a href="https://hoolanensemble.com/divided-nations" target="_blank" rel="noopener">More Details</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">To the Pointer Stars</div>
+              <div class="meta">2024 · Piano Trio</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano Trio</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">12'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Sitkovetsky Trio</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Sitkovetsky Trio, 2025, Fränkischer Sommer Festival</div></div>
+              <div class="work-statement">Suppression and elimination of intellectuals is a common practice of totalitarian regimes. This piece is dedicated to the memory of those who were sacrificed for defending freedom of thought, and is inspired by those who fell in the fight for free thought.</div>
+              <div class="work-listen-link"><a href="https://www.fraenkischer-sommer.de/1e590abb-c13f-143e-35e2-8e8a68c71910" target="_blank" rel="noopener">More Details</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Let It Remain for Liberation Day</div>
+              <div class="meta">2022 · Quintet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Oboe, Clarinet, Saxophone, Bass Clarinet, Bassoon</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">14'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Woodwork Reed Quintet</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Woodwork Reed Quintet, 2025, Belgaum</div></div>
+              <div class="work-statement">The final days of writing this piece, which is based on the local dances of four regions of Iran, coincided with the killing of the Iranian girl, Mahsa Amini, and the Women, Life, Freedom movement. Therefore, I chose the title of the work to be "Let it remain for the Liberation days," in hopes of Iran's liberation.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">The Phoenix</div>
+              <div class="meta">2020 · Song Cycle, Quintet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Shourangiz, Soprano, Bass Baritone, Piano, Cello</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">55'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Heidelberg Festival, 2020</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Oxford International Song Festival, Holywell Music Room, Oct 2023</div></div>
+              <div class="work-statement">Inspired by "On the Reality of Love" by Shihabuddin Yahya Suhrawardi (master of Illumination), composed in six movements: Intellect, Beauty, Love, Sorrow, Astonishment, and Light — tracing how beauty, love, and sorrow, born from one source, lead through despair into a wilderness of astonishment.</div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/sets/the-phoenix" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">And the Moses Drowned</div>
+              <div class="meta">2017 · String Quartet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">String Quartet</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">14'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Heidelberg Music Festival</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Heidelberg Music Festival, 2017, Germany</div></div>
+              <div class="work-statement">One in every five fallen civilian bodies in the Syrian war was smaller than the others. One in every five ascending souls was lighter than the others. This piece is dedicated to the memory of the more than 25,000 smaller bodies and lighter souls — to Aylan Kurdi and all innocent children fallen victim to war.</div>
+              <div class="work-listen-link"><a href="https://www.youtube.com/watch?v=wJ0aleJhsZU" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Heaven Has No Other Prayer Niche but Love</div>
+              <div class="meta">2018 · Quartet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano, Saxophone, Guitar, Percussion</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">9'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Hypercube Ensemble</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Hypercube Ensemble</div></div>
+              <div class="work-statement">A sonic translation of Eastern aesthetics in praise of beauty and the human form, drawing on the Amorous Lyrics of the mystic poet Nezami Ganjavi — built on the foundation of his "Shirin and Khosrow," a tragic romance written eight centuries ago.</div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/heaven-has-no-other-prayer-niche-but-love" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">This Is Crime</div>
+              <div class="meta">2017 · Sextet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Soprano, String Quartet, Bassoon</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">8'30"</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Haft Craft Ensemble, 2017, Belgium</div></div>
+              <div class="work-statement">Inspired by the poem "کیفر" (Retribution) by Ahmad Shamlou.</div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/this-is-crime" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Fight &amp; Feast</div>
+              <div class="meta">2017 · Septet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Fight: Flute, Mezzo Soprano, Piano, Violin, Cello · Feast: Clarinet, Percussion, Violin, Viola, Cello</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">Fight 8' · Feast 6'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Hermes Ensemble, 2018, Belgium</div></div>
+              <div class="work-statement">Fight and Feast were written according to poem number 316 by Hafez Shirazi.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">The Little Black Fish</div>
+              <div class="meta">2016 · Quintet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">String Quartet, Bassoon</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">9'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Haft Craft Ensemble</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Haft Craft Ensemble, 2014, Bozar Concert Hall, Brussels</div></div>
+              <div class="work-statement">Based on the story of The Little Black Fish by Samad Behrangi.</div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/the-little-black-fish" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">The Cat's Suffering</div>
+              <div class="meta">2020 · Piano Trio</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano Trio</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">12'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Sitkovetsky Trio</div></div>
+              <div class="work-statement">People's view on objects is idiosyncratic; identity shifts in the eye of the beholder. For many years the map of Iran, my home country, has been likened to a cat — and I have been living in the throat of this cat for many years.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Heart Snatcher</div>
+              <div class="meta">2016 · Duet, Soprano &amp; Piano</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano, Soprano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">7'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">MelosLogos Festival, 2016, Germany</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Sheyda Damghani (soprano), Burkhard Kehring (piano)</div></div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/heart-snatcher-song-pianovoice" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">In a Corner of Endurance</div>
+              <div class="meta">2013 · Duet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano, Percussion (Marimba, Vibraphone)</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">12'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Torrent of Turmoil</div>
+              <div class="meta">2022 · String Quartet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">String Quartet</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">7'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Flight of a Captive</div>
+              <div class="meta">2015 · Duet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Bassoon, Piano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">10'</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Geert Callaert (piano), Bert Helsen (bassoon)</div></div>
+              <div class="work-statement">Inspired by the sacrifice of an Iranian soldier who lost his life defending Iran's borders.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Chasing the Wind</div>
+              <div class="meta">2018 · Chamber Ensemble</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Kamanche, Ney, Oud, Clarinet, Saxophone, Violin, Viola, Cello</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">12'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Babylon Orchestra</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Babylon Orchestra, Oct 2018, Berlin, Germany</div></div>
+              <div class="work-statement">Inspired by the poetry of Galal Alahmadi.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Concerto for Clarinet and Ensemble</div>
+              <div class="meta">2014 · Septet</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Clarinet in A, Flute, Percussion, Marimba, Vibraphone, Accordion, Contrabass</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">8'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Lemmensinstituut, Luca School of Arts</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered</div><div class="val">Lemmensinstituut, Luca School of Arts, 2015, Belgium</div></div>
+            </div></div>
+          </div>
+
         </div>
       </div>
 
       <div class="work-group">
         <h3>Solo Works</h3>
         <div class="work-list">
-          <div class="work-row"><div class="title">Persian Frames</div><div class="meta">2012 · Solo Piano</div></div>
-          <div class="work-row"><div class="title">Persian Dances</div><div class="meta">2013 · Solo Guitar</div></div>
-          <div class="work-row"><div class="title">Miniatures</div><div class="meta">2014 · Solo Harp</div></div>
-          <div class="work-row"><div class="title">The Little Sparrow, Ashi Mashi</div><div class="meta">2018 · Solo Harpsichord</div></div>
-          <div class="work-row"><div class="title">Old Friend</div><div class="meta">2013 · Solo Piano</div></div>
-          <div class="work-row"><div class="title">هیچ / Nothing</div><div class="meta">2014 · Solo Piano</div></div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Persian Frames</div>
+              <div class="meta">2012 · Solo Piano</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Piano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">45'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">4020 Music Festival</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Suyang Kim, 4020 Music Festival, Brucknerhaus Linz, Austria, 2013</div></div>
+              <div class="work-statement">Inspired by seven miniature paintings by Mahmoud Farshchian.</div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/persian-frames-movement-4" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Persian Dances</div>
+              <div class="meta">2013 · Solo Guitar</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Guitar</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">9'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Arnaldo Freire</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Arnaldo Freire, UNAM University, Mexico, 2013</div></div>
+              <div class="work-listen-link"><a href="https://www.youtube.com/watch?v=HT2isCH5wTM" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Miniatures</div>
+              <div class="meta">2014 · Solo Harp</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Harp</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">5'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+              <div class="work-statement">Inspired by Iranian classical music.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">The Little Sparrow, Ashi Mashi</div>
+              <div class="meta">2018 · Solo Harpsichord</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Harpsichord</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">7'</div></div>
+              <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Koninklijk Conservatorium, Belgium</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Liselotte Sels, Koninklijk Conservatorium, 2018</div></div>
+              <div class="work-statement">Inspired by the Persian tale "Ashi Mashi."</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Old Friend</div>
+              <div class="meta">2013 · Solo Piano</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Piano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">7'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Geert Callaert, Lemmensinstituut, Luca School of Arts, 2015, Belgium</div></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">هیچ / Nothing</div>
+              <div class="meta">2014 · Solo Piano</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Solo Piano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">5'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned</div></div>
+              <div class="work-detail-field"><div class="lbl">Premiered by</div><div class="val">Geert Callaert, Roudaki Hall, Tehran, Iran, 2015</div></div>
+            </div></div>
+          </div>
+
         </div>
       </div>
 
       <div class="work-group">
         <h3>Orchestral Works</h3>
         <div class="work-list">
-          <div class="work-row"><div class="title">Battle of Zahhak and Fereydoun</div><div class="meta">2015 · Orchestral</div></div>
-          <div class="work-row"><div class="title">The Firmament</div><div class="meta">2016 · String Orchestra</div></div>
-          <div class="work-row"><div class="title">A Piece for an Orchestra</div><div class="meta">2012 · Orchestral</div></div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">Battle of Zahhak and Fereydoun</div>
+              <div class="meta">2015 · Orchestral</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Full Orchestra</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">8'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+              <div class="work-statement">Drawn from the Shahnameh: before Fereydoun's birth, the tyrant Zahhak dreamed a young man would overthrow him and hunted for the child. Raised in hiding on Mount Alborz, Fereydoun later returned, learned of his father's death, and rose against Zahhak — leading to a great victory.</div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">The Firmament</div>
+              <div class="meta">2016 · String Orchestra</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">String Orchestra</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">6'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+            </div></div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">A Piece for an Orchestra</div>
+              <div class="meta">2012 · Orchestral</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Full Orchestra</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">13'</div></div>
+              <div class="work-detail-field"><div class="lbl">Status</div><div class="val">Non-commissioned, unperformed</div></div>
+            </div></div>
+          </div>
+
         </div>
       </div>
 
       <div class="work-group">
         <h3>Film Music</h3>
         <div class="work-list">
-          <div class="work-row"><div class="title">گزارشی از ماناسلو / A Report of Manaslu</div><div class="meta">2015 · Documentary</div><div class="link"><a href="https://soundcloud.com/mahdis-golzar-kashani/film-music" target="_blank" rel="noopener">Listen ↗</a></div></div>
+
+          <div class="work-item">
+            <div class="work-row" onclick="toggleWork(this)">
+              <div class="title">گزارشی از ماناسلو / A Report of Manaslu</div>
+              <div class="meta">2015 · Documentary</div>
+              <div class="work-toggle">+</div>
+            </div>
+            <div class="work-details"><div class="work-details-inner">
+              <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Piano, Violin, Cello, Taar, Soprano</div></div>
+              <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">17'</div></div>
+              <div class="work-detail-field"><div class="lbl">Producer</div><div class="val">Ehsan Rasoulof, 2016</div></div>
+              <div class="work-detail-field"><div class="lbl">Director</div><div class="val">Reza Tofighjoo</div></div>
+              <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/film-music" target="_blank" rel="noopener">Listen</a></div>
+            </div></div>
+          </div>
+
         </div>
       </div>
 
@@ -1168,10 +1638,10 @@
     </div>
 
     <div class="timeline" id="timelineList">
-      <div class="t-row"><div class="t-date">Sep 2025</div><div class="t-body"><h4>Hoolan Ensemble</h4><div class="piece">World premiere — A Deep Breath Between Two Bullets</div><div class="venue">IKEA, Glasgow</div></div></div>
-      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Dubrovnik Summer Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Atrij Kneževa dvora, Croatia</div></div></div>
-      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Edinburgh International Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Queen's Hall, Edinburgh</div></div></div>
-      <div class="t-row"><div class="t-date">May 2025</div><div class="t-body"><h4>Fränkischer Sommer Festival</h4><div class="piece">World premiere — To the Pointer Stars, Sitkovetsky Trio</div><div class="venue">Rathausplatz, Nuremberg</div></div></div>
+      <div class="t-row"><div class="t-date">Sep 2025</div><div class="t-body"><h4>Hoolan Ensemble</h4><div class="piece">World premiere — A Deep Breath Between Two Bullets</div><div class="venue">IKEA, Glasgow</div><a class="evlink" href="https://hoolanensemble.com/divided-nations" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Dubrovnik Summer Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Atrij Kneževa dvora, Croatia</div><a class="evlink" href="https://www.dubrovnik-festival.hr/en/event/sitkovetsky-trio/222" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Edinburgh International Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Queen's Hall, Edinburgh</div><a class="evlink" href="https://www.eif.co.uk/events/sitkovetsky-trio" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row"><div class="t-date">May 2025</div><div class="t-body"><h4>Fränkischer Sommer Festival</h4><div class="piece">World premiere — To the Pointer Stars, Sitkovetsky Trio</div><div class="venue">Rathausplatz, Nuremberg</div><a class="evlink" href="https://www.fraenkischer-sommer.de/1e590abb-c13f-143e-35e2-8e8a68c71910" target="_blank" rel="noopener">Event Details ↗</a></div></div>
       <div class="t-row"><div class="t-date">Mar 2025</div><div class="t-body"><h4>A Celebration of Contemporary Iranian Music</h4><div class="piece">Persian Frame No. III · Cat's Suffering</div><div class="venue">St George's, City, University of London</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Nov 2020</div><div class="t-body"><h4>Oxford International Song Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">Online stream, Oxford, UK</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Aug 2020</div><div class="t-body"><h4>Federation Bells</h4><div class="piece">Isfahan</div><div class="venue">Melbourne, Australia</div></div></div>
@@ -1198,6 +1668,7 @@
       <div class="t-row collapsed"><div class="t-date">Apr 2014</div><div class="t-body"><h4>Yogyakarta Contemporary Music Festival</h4><div class="piece">Faghan</div><div class="venue">Yogyakarta, Indonesia</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Mar 2014</div><div class="t-body"><h4>International Women's Day</h4><div class="piece">String Quartet No. 1</div><div class="venue">Austria Embassy (OKF), Tehran, Iran</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Mar 2014</div><div class="t-body"><h4>Concert</h4><div class="piece">Concerto for Clarinet · Persian Frame · Old Friend</div><div class="venue">Campus Lemmensinstituut, LUCA Brussels, Belgium</div></div></div>
+      <div class="t-row collapsed"><div class="t-date">Mar 2014</div><div class="t-body"><h4>Piano Recital</h4><div class="piece">As pianist</div><div class="venue">Khaje Nasiroddin-e Toosi University, Tehran, Iran</div></div></div>
       <div class="t-row collapsed"><div class="t-date">May 2014</div><div class="t-body"><h4>Solo Guitar Recital</h4><div class="piece">Persian Dances</div><div class="venue">UNAM University, Mexico</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2014</div><div class="t-body"><h4>NOB Ensemble</h4><div class="piece">The Little Black Fish</div><div class="venue">Brussels, Belgium</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Oct 2013</div><div class="t-body"><h4>3rd Festival of Classical to Contemporary Music</h4><div class="piece">As pianist</div><div class="venue">Tehran University, Avini Hall, Iran</div></div></div>
@@ -1293,12 +1764,6 @@
 
 <footer>
   <div class="wrap">
-    <div class="fname">Mahdis Golzar Kashani</div>
-    <div class="fsocial" id="footerSocial">
-      <a href="https://www.instagram.com/mahdis.golzarkashani" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.youtube.com/@mahdisgolzarkashani9485" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://www.linkedin.com/in/mahdis-golzar-kashani-b0562586/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
     <div class="copy">© 2026 Mahdis Golzar Kashani · All Rights Reserved</div>
     <a href="#" class="admin-link" id="adminTrigger">⚙ Site Manager</a>
   </div>
@@ -1384,12 +1849,12 @@
     <!-- Images Tab -->
     <div class="admin-tab-content" id="tab-images">
       <div class="admin-help">
-        📋 <b>راهنما:</b><br>
-        ۱. روی هر عکس کلیک کنید و عکس جدید انتخاب کنید<br>
-        ۲. پیش‌نمایش فوری می‌بینید<br>
-        ۳. دکمه «دانلود فایل» را بزنید<br>
-        ۴. فایل دانلود می‌شود → در صفحه‌ی اصلی GitHub repository (همان‌جایی که index.html هست)، فایل هم‌نام را پیدا کنید<br>
-        ۵. روی فایل کلیک کنید → آیکون مداد (Edit) → Upload file → همین فایل را بدهید → Commit
+        📋 <b>How to update an image:</b><br>
+        1. Click any image below and choose a new file<br>
+        2. You'll see an instant preview<br>
+        3. Click the "Download for GitHub" button<br>
+        4. The file downloads → go to the main page of your GitHub repository (where index.html lives) and find the file with the same name<br>
+        5. Click the file → pencil icon (Edit) → Upload file → give it this same file → Commit
       </div>
       <div id="imageManageList"></div>
     </div>
@@ -1451,6 +1916,12 @@ function toggleTimeline(){
     row.style.display = timelineExpanded ? 'grid' : 'none';
   });
   document.getElementById('showMoreBtn').textContent = timelineExpanded ? 'Show Fewer Performances' : 'Show Earlier Performances';
+}
+
+/* ============ Composition accordion ============ */
+function toggleWork(rowEl){
+  const item = rowEl.closest('.work-item');
+  item.classList.toggle('open');
 }
 
 /* ============ Gallery lightbox (simple) ============ */
@@ -1718,8 +2189,8 @@ renderFrontendAlbums();
 
 /* ============ Admin: Images ============ */
 const MANAGED_IMAGES = [
-  {id:'hero', label:'Hero (صفحه اول)', selector:'.hero-image img'},
-  {id:'about', label:'About (بیوگرافی)', selector:'#aboutPhotoImg'},
+  {id:'hero', label:'Hero (homepage)', selector:'.hero-image img'},
+  {id:'about', label:'About (biography)', selector:'#aboutPhotoImg'},
 ];
 function renderImageManager(){
   const wrap = document.getElementById('imageManageList');
@@ -1730,7 +2201,7 @@ function renderImageManager(){
     <div class="img-manage-row">
       <img src="${src}" id="imgPreview_${img.id}">
       <div class="info">${img.label}</div>
-      <button onclick="document.getElementById('imgInput_${img.id}').click()">🔄 تغییر</button>
+      <button onclick="document.getElementById('imgInput_${img.id}').click()">🔄 Change</button>
       <input type="file" id="imgInput_${img.id}" accept="image/*" style="display:none;" onchange="handleImageChange('${img.id}', '${img.selector}', this)">
     </div>`;
   }).join('');
@@ -1751,7 +2222,7 @@ function handleImageChange(id, selector, input){
     if(!dlBtn){
       dlBtn = document.createElement('button');
       dlBtn.className = 'dl-btn';
-      dlBtn.textContent = '💾 دانلود برای GitHub';
+      dlBtn.textContent = '💾 Download for GitHub';
       wrap.appendChild(dlBtn);
     }
     dlBtn.onclick = () => a.click();
@@ -1800,6 +2271,7 @@ function applyContactInfo(){
   const map = {instagram:'Instagram', youtube:'YouTube', linkedin:'LinkedIn', facebook:'Facebook'};
   ['socialRow','footerSocial'].forEach(rowId => {
     const row = document.getElementById(rowId);
+    if(!row) return;
     Array.from(row.querySelectorAll('a')).forEach(a => {
       const text = a.textContent.trim();
       for(const key in map){
