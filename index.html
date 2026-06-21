@@ -983,7 +983,7 @@
     <h1 class="hero-title">Composer<br><em>Pianist</em></h1>
   </div>
   <div class="hero-image">
-    <img src="images/hero.jpg" alt="Mahdis Golzar Kashani">
+    <img src="hero.jpg" alt="Mahdis Golzar Kashani">
   </div>
 </section>
 
@@ -995,7 +995,7 @@
     </div>
     <div class="about-grid">
       <div class="about-photo">
-        <img src="images/about_1.jpg" alt="Mahdis Golzar Kashani portrait" id="aboutPhotoImg">
+        <img src="about_1.jpg" alt="Mahdis Golzar Kashani portrait" id="aboutPhotoImg">
       </div>
       <div class="about-bio">
         <div id="bioText">
@@ -1051,14 +1051,14 @@
         </div>
 
         <div class="gallery-strip" id="galleryStrip">
-          <img src="images/gallery_03.jpg" alt="" loading="lazy">
-          <img src="images/gallery_18.jpg" alt="" loading="lazy">
-          <img src="images/gallery_11.jpg" alt="" loading="lazy">
-          <img src="images/gallery_06.jpg" alt="" loading="lazy">
-          <img src="images/gallery_15.jpg" alt="" loading="lazy">
-          <img src="images/gallery_09.jpg" alt="" loading="lazy">
-          <img src="images/gallery_19.jpg" alt="" loading="lazy">
-          <img src="images/gallery_04.jpg" alt="" loading="lazy">
+          <img src="gallery_03.jpg" alt="" loading="lazy">
+          <img src="gallery_18.jpg" alt="" loading="lazy">
+          <img src="gallery_11.jpg" alt="" loading="lazy">
+          <img src="gallery_06.jpg" alt="" loading="lazy">
+          <img src="gallery_15.jpg" alt="" loading="lazy">
+          <img src="gallery_09.jpg" alt="" loading="lazy">
+          <img src="gallery_19.jpg" alt="" loading="lazy">
+          <img src="gallery_04.jpg" alt="" loading="lazy">
         </div>
       </div>
     </div>
@@ -1128,28 +1128,28 @@
 
     <div class="disc-grid" id="discGrid">
       <div class="disc-card">
-        <div class="disc-cover"><img src="images/disc_sirventes.jpg" alt="Sirventès album cover"></div>
+        <div class="disc-cover"><img src="disc_sirventes.jpg" alt="Sirventès album cover"></div>
         <h4>Sirventès</h4>
         <div class="role">Composer — And the Moses Drowned</div>
         <div class="label">New Focus Recordings · 2023</div>
         <a class="listen" href="https://www.youtube.com/watch?v=wJ0aleJhsZU" target="_blank" rel="noopener">Listen ↗</a>
       </div>
       <div class="disc-card">
-        <div class="disc-cover"><img src="images/disc_littleblackfish.jpg" alt="Little Black Fish album cover"></div>
+        <div class="disc-cover"><img src="disc_littleblackfish.jpg" alt="Little Black Fish album cover"></div>
         <h4>Little Black Fish</h4>
         <div class="role">Composer — This Is Crime</div>
         <div class="label">HaftCraft Records · 2019</div>
         <a class="listen" href="https://soundcloud.com/haftcraftensemble/sets/little-black-fish-1" target="_blank" rel="noopener">Listen ↗</a>
       </div>
       <div class="disc-card">
-        <div class="disc-cover"><img src="images/disc_manaslu.jpg" alt="Report of Manaslu poster"></div>
+        <div class="disc-cover"><img src="disc_manaslu.jpg" alt="Report of Manaslu poster"></div>
         <h4>Report of Manaslu</h4>
         <div class="role">Composer &amp; Pianist (with Vahid Taremi)</div>
         <div class="label">Esfand Studio · 2015</div>
         <a class="listen" href="https://soundcloud.com/mahdis-golzar-kashani/film-music" target="_blank" rel="noopener">Listen ↗</a>
       </div>
       <div class="disc-card">
-        <div class="disc-cover"><img src="images/disc_lastword.jpg" alt="The Last Word album cover"></div>
+        <div class="disc-cover"><img src="disc_lastword.jpg" alt="The Last Word album cover"></div>
         <h4>The Last Word</h4>
         <div class="role">Pianist</div>
         <div class="label">PHM Record · 2019</div>
@@ -1370,7 +1370,7 @@
       <label>Label · Year</label>
       <input type="text" id="alLabel" placeholder="e.g. New Focus Recordings · 2026">
       <label>Cover Image URL</label>
-      <input type="text" id="alCover" placeholder="images/disc_newalbum.jpg">
+      <input type="text" id="alCover" placeholder="disc_newalbum.jpg">
       <label>Listen Link</label>
       <input type="text" id="alLink" placeholder="https://...">
       <button class="admin-save-btn" onclick="addAlbum()">+ Add Album</button>
@@ -1388,8 +1388,8 @@
         ۱. روی هر عکس کلیک کنید و عکس جدید انتخاب کنید<br>
         ۲. پیش‌نمایش فوری می‌بینید<br>
         ۳. دکمه «دانلود فایل» را بزنید<br>
-        ۴. فایل دانلود می‌شود → در GitHub فولدر <code>images/</code> را باز کنید<br>
-        ۵. روی فایل هم‌نام کلیک کنید → آیکون مداد (Edit) → Upload file → همین فایل را بدهید → Commit
+        ۴. فایل دانلود می‌شود → در صفحه‌ی اصلی GitHub repository (همان‌جایی که index.html هست)، فایل هم‌نام را پیدا کنید<br>
+        ۵. روی فایل کلیک کنید → آیکون مداد (Edit) → Upload file → همین فایل را بدهید → Commit
       </div>
       <div id="imageManageList"></div>
     </div>
@@ -1706,7 +1706,7 @@ function renderFrontendAlbums(){
   }
   dynWrap.innerHTML = albums.map(al => `
     <div class="disc-card">
-      <div class="disc-cover"><img src="${al.cover || 'images/hero.jpg'}" alt="${al.title}"></div>
+      <div class="disc-cover"><img src="${al.cover || 'hero.jpg'}" alt="${al.title}"></div>
       <h4>${al.title}</h4>
       <div class="role">${al.role || ''}</div>
       <div class="label">${al.label || ''}</div>
