@@ -75,9 +75,8 @@
   header{
     position:fixed;
     top:0;left:0;right:0;
-    z-index:100;
-    background:rgba(14,13,12,0.82);
-    backdrop-filter:blur(10px);
+    z-index:1000;
+    background:var(--ink);
     border-bottom:1px solid var(--line-soft);
   }
 
@@ -124,6 +123,7 @@
   }
 
   @media (max-width:760px){
+    header{background:rgba(14,13,12,0.96);}
     nav.links{
       position:fixed;
       top:60px;left:0;right:0;
@@ -192,10 +192,10 @@
   }
 
   @media (max-width:640px){
-    .hero{align-items:flex-start;}
-    .hero-image{height:auto;width:100%;}
-    .hero-image img{width:100%;height:auto;object-fit:cover;}
-    .hero-image::after{background:linear-gradient(180deg, rgba(14,13,12,0.2) 0%, rgba(14,13,12,0) 15%, rgba(14,13,12,0) 65%, var(--ink) 100%);}
+    .hero{align-items:flex-start;min-height:0;display:block;}
+    .hero-image{height:auto;width:100%;aspect-ratio:4/5;}
+    .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
+    .hero-image::after{background:linear-gradient(180deg, rgba(14,13,12,0.25) 0%, rgba(14,13,12,0) 15%, rgba(14,13,12,0) 60%, var(--ink) 100%);}
     .hero-title{bottom:22px;left:22px;font-size:11.5px;}
   }
 
@@ -279,6 +279,8 @@
     color:#d8d2c6;
     margin-bottom:22px;
     max-width:620px;
+    text-align:justify;
+    text-justify:inter-word;
   }
 
   .about-bio p:first-of-type{
@@ -696,9 +698,11 @@
     color:var(--gold);
     margin-top:6px;
     display:inline-block;
+    border-bottom:1px solid var(--gold-dim);
+    padding-bottom:1px;
   }
 
-  .t-body .evlink:hover{color:var(--rose);}
+  .t-body .evlink:hover{color:var(--rose);border-color:var(--rose);}
 
   .t-row.collapsed{display:none;}
 
@@ -743,9 +747,11 @@
     color:var(--gold);
     letter-spacing:0.05em;
     text-transform:uppercase;
+    border-bottom:1px solid var(--gold-dim);
+    padding-bottom:1px;
   }
 
-  .press-item a:hover{color:var(--rose);}
+  .press-item a:hover{color:var(--rose);border-color:var(--rose);}
 
   /* ===== Contact ===== */
   .contact-grid{
@@ -1110,9 +1116,9 @@
 </header>
 
 <section class="hero" id="home" style="border-bottom:none;padding:0;">
-  <div class="hero-title">Composer <em>·</em> Pianist</div>
   <div class="hero-image">
     <img src="hero.jpg" alt="Mahdis Golzar Kashani">
+    <div class="hero-title">Composer <em>·</em> Pianist</div>
   </div>
 </section>
 
@@ -1352,7 +1358,7 @@
               <div class="work-detail-field"><div class="lbl">Instrumentation</div><div class="val">Soprano, String Quartet, Bassoon</div></div>
               <div class="work-detail-field"><div class="lbl">Duration</div><div class="val">8'30"</div></div>
               <div class="work-detail-field"><div class="lbl">Commissioned by</div><div class="val">Haft Craft Ensemble, 2017, Belgium</div></div>
-              <div class="work-statement">Inspired by the poem "کیفر" (Retribution) by Ahmad Shamlou.</div>
+              <div class="work-statement">Inspired by the poem "Retribution" by Ahmad Shamlou.</div>
               <div class="work-listen-link"><a href="https://soundcloud.com/mahdis-golzar-kashani/this-is-crime" target="_blank" rel="noopener">Listen</a></div>
             </div></div>
           </div>
@@ -1483,7 +1489,7 @@
 
           <div class="work-item">
             <div class="work-row" onclick="toggleWork(this)">
-              <div class="title">هیچ / Nothing</div>
+              <div class="title">Nothing</div>
               <div class="meta">2014 · Solo Piano</div>
               <div class="work-toggle">+</div>
             </div>
@@ -1596,7 +1602,7 @@
 
           <div class="work-item">
             <div class="work-row" onclick="toggleWork(this)">
-              <div class="title">گزارشی از ماناسلو / A Report of Manaslu</div>
+              <div class="title">A Report of Manaslu</div>
               <div class="meta">2015 · Documentary</div>
               <div class="work-toggle">+</div>
             </div>
@@ -1620,28 +1626,28 @@
         <h4>Sirventès</h4>
         <div class="role">Composer — And the Moses Drowned</div>
         <div class="label">New Focus Recordings · 2023</div>
-        <a class="listen" href="https://www.youtube.com/watch?v=wJ0aleJhsZU" target="_blank" rel="noopener">Listen ↗</a>
+        <a class="listen" href="https://www.youtube.com/watch?v=wJ0aleJhsZU" target="_blank" rel="noopener">Listen</a>
       </div>
       <div class="disc-card">
         <div class="disc-cover"><img src="disc_littleblackfish.jpg" alt="Little Black Fish album cover"></div>
         <h4>Little Black Fish</h4>
         <div class="role">Composer — This Is Crime</div>
         <div class="label">HaftCraft Records · 2019</div>
-        <a class="listen" href="https://soundcloud.com/haftcraftensemble/sets/little-black-fish-1" target="_blank" rel="noopener">Listen ↗</a>
+        <a class="listen" href="https://soundcloud.com/haftcraftensemble/sets/little-black-fish-1" target="_blank" rel="noopener">Listen</a>
       </div>
       <div class="disc-card">
         <div class="disc-cover"><img src="disc_lastword.jpg" alt="The Last Word album cover"></div>
         <h4>The Last Word</h4>
         <div class="role">Pianist</div>
         <div class="label">PHM Record · 2019</div>
-        <a class="listen" href="https://music.apple.com/ae/album/the-last-word/1457090997" target="_blank" rel="noopener">Listen ↗</a>
+        <a class="listen" href="https://music.apple.com/ae/album/the-last-word/1457090997" target="_blank" rel="noopener">Listen</a>
       </div>
       <div class="disc-card">
         <div class="disc-cover"><img src="disc_manaslu.jpg" alt="Report of Manaslu poster"></div>
         <h4>Report of Manaslu</h4>
         <div class="role">Composer &amp; Pianist (with Vahid Taremi)</div>
         <div class="label">Esfand Studio · 2015</div>
-        <a class="listen" href="https://soundcloud.com/mahdis-golzar-kashani/film-music" target="_blank" rel="noopener">Listen ↗</a>
+        <a class="listen" href="https://soundcloud.com/mahdis-golzar-kashani/film-music" target="_blank" rel="noopener">Listen</a>
       </div>
     </div>
 
@@ -1655,40 +1661,40 @@
     </div>
 
     <div class="timeline" id="timelineList">
-      <div class="t-row"><div class="t-date">Sep 2025</div><div class="t-body"><h4>Hoolan Ensemble</h4><div class="piece">World premiere — A Deep Breath Between Two Bullets</div><div class="venue">IKEA, Glasgow</div><a class="evlink" href="https://hoolanensemble.com/divided-nations" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Dubrovnik Summer Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Atrij Kneževa dvora, Croatia</div><a class="evlink" href="https://www.dubrovnik-festival.hr/en/event/sitkovetsky-trio/222" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Edinburgh International Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Queen's Hall, Edinburgh</div><a class="evlink" href="https://www.eif.co.uk/events/sitkovetsky-trio" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row"><div class="t-date">May 2025</div><div class="t-body"><h4>Fränkischer Sommer Festival</h4><div class="piece">World premiere — To the Pointer Stars, Sitkovetsky Trio</div><div class="venue">Rathausplatz, Nuremberg</div><a class="evlink" href="https://www.fraenkischer-sommer.de/1e590abb-c13f-143e-35e2-8e8a68c71910" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row"><div class="t-date">Mar 2025</div><div class="t-body"><h4>A Celebration of Contemporary Iranian Music</h4><div class="piece">Persian Frame No. III · Cat's Suffering</div><div class="venue">St George's, City, University of London</div><a class="evlink" href="https://www.citystgeorges.ac.uk/news-and-events/events/2025/march/celebration-of-contemporary-iranian-music" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Sep 2024</div><div class="t-body"><h4>Sonic Sculptures 3: Playground of Sound</h4><div class="piece">Faghan · The Little Black Fish · Flight of a Captive</div><div class="venue">Primary, Nottingham, UK</div><a class="evlink" href="https://rorschachaudio.com/2024/09/12/electromagnetic-sound-art-nottingham/" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Oct 2023</div><div class="t-body"><h4>Oxford International Song Festival</h4><div class="piece">Premiere of The Phoenix</div><div class="venue">Holywell Music Room, Oxford, UK</div><a class="evlink" href="https://oxfordsong.org/events/the-phoenix" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">May 2023</div><div class="t-body"><h4>Radio 3 BBC Lunchtime Concert</h4><div class="piece">Heart Snatcher</div><div class="venue">St Mary's Church, London, UK</div><a class="evlink" href="https://www.bbc.co.uk/programmes/m001m5bj" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row"><div class="t-date">Sep 2025</div><div class="t-body"><h4>Hoolan Ensemble</h4><div class="piece">World premiere — A Deep Breath Between Two Bullets</div><div class="venue">IKEA, Glasgow</div><a class="evlink" href="https://hoolanensemble.com/divided-nations" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Dubrovnik Summer Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Atrij Kneževa dvora, Croatia</div><a class="evlink" href="https://www.dubrovnik-festival.hr/en/event/sitkovetsky-trio/222" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row"><div class="t-date">Aug 2025</div><div class="t-body"><h4>Edinburgh International Festival</h4><div class="piece">To the Pointer Stars — Sitkovetsky Trio</div><div class="venue">Queen's Hall, Edinburgh</div><a class="evlink" href="https://www.eif.co.uk/events/sitkovetsky-trio" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row"><div class="t-date">May 2025</div><div class="t-body"><h4>Fränkischer Sommer Festival</h4><div class="piece">World premiere — To the Pointer Stars, Sitkovetsky Trio</div><div class="venue">Rathausplatz, Nuremberg</div><a class="evlink" href="https://www.fraenkischer-sommer.de/1e590abb-c13f-143e-35e2-8e8a68c71910" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row"><div class="t-date">Mar 2025</div><div class="t-body"><h4>A Celebration of Contemporary Iranian Music</h4><div class="piece">Persian Frame No. III · Cat's Suffering</div><div class="venue">St George's, City, University of London</div><a class="evlink" href="https://www.citystgeorges.ac.uk/news-and-events/events/2025/march/celebration-of-contemporary-iranian-music" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Sep 2024</div><div class="t-body"><h4>Sonic Sculptures 3: Playground of Sound</h4><div class="piece">Faghan · The Little Black Fish · Flight of a Captive</div><div class="venue">Primary, Nottingham, UK</div><a class="evlink" href="https://rorschachaudio.com/2024/09/12/electromagnetic-sound-art-nottingham/" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Oct 2023</div><div class="t-body"><h4>Oxford International Song Festival</h4><div class="piece">Premiere of The Phoenix</div><div class="venue">Holywell Music Room, Oxford, UK</div><a class="evlink" href="https://oxfordsong.org/events/the-phoenix" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">May 2023</div><div class="t-body"><h4>Radio 3 BBC Lunchtime Concert</h4><div class="piece">Heart Snatcher</div><div class="venue">St Mary's Church, London, UK</div><a class="evlink" href="https://www.bbc.co.uk/programmes/m001m5bj" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">May 2023</div><div class="t-body"><h4>Hay Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">St Mary's Church, London, UK</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Sep 2022</div><div class="t-body"><h4>Sipa Festival</h4><div class="piece">Leily</div><div class="venue">Online Stream, Jakarta, Indonesia</div><a class="evlink" href="https://youtu.be/Dnk99rzWD8Y?si=kr4sSrTGzRjNK9zC" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Nov 2020</div><div class="t-body"><h4>Oxford International Song Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">Online stream, Oxford, UK</div><a class="evlink" href="https://oxfordsong.org/song/heart-snatcher" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Sep 2022</div><div class="t-body"><h4>Sipa Festival</h4><div class="piece">Leily</div><div class="venue">Online Stream, Jakarta, Indonesia</div><a class="evlink" href="https://youtu.be/Dnk99rzWD8Y?si=kr4sSrTGzRjNK9zC" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Nov 2020</div><div class="t-body"><h4>Oxford International Song Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">Online stream, Oxford, UK</div><a class="evlink" href="https://oxfordsong.org/song/heart-snatcher" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Aug 2020</div><div class="t-body"><h4>Federation Bells</h4><div class="piece">Isfahan</div><div class="venue">Melbourne, Australia</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Dec 2019</div><div class="t-body"><h4>Glasperlenspiel Festival — HaftCraft Ensemble</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">St John's Church, Tartu, Estonia</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Aug 2019</div><div class="t-body"><h4>Goethe and Hafez: 200 Years of West-Eastern Divan</h4><div class="piece">Heart Snatcher</div><div class="venue">Hospitalhof Stuttgart, Germany</div><a class="evlink" href="http://divan-of-song.com/event/goethe-and-hafez-celebrating-200-years-of-west-eastern-divan/" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Mar 2019</div><div class="t-body"><h4>Hypercube Ensemble / IFCA</h4><div class="piece">Heaven Has No Other Prayer Niche but Love</div><div class="venue">Roulette, Brooklyn, New York</div><a class="evlink" href="https://roulette.org/assets/040319_IFCAandHypercube_PreviewFeature.pdf" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Mar 2019</div><div class="t-body"><h4>Hypercube Ensemble / IFCA</h4><div class="piece">Heaven Has No Other Prayer Niche but Love</div><div class="venue">Kennedy Center, Washington DC</div><a class="evlink" href="https://www.hypercubemusic.org/events-1.html" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Oct 2018</div><div class="t-body"><h4>Babylon Orchestra</h4><div class="piece">Chasing the Wind</div><div class="venue">HAU1, Berlin, Germany</div><a class="evlink" href="https://www.hebbel-am-ufer.de/en/programme/pdetail/babylon-orchestra" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Aug 2019</div><div class="t-body"><h4>Goethe and Hafez: 200 Years of West-Eastern Divan</h4><div class="piece">Heart Snatcher</div><div class="venue">Hospitalhof Stuttgart, Germany</div><a class="evlink" href="http://divan-of-song.com/event/goethe-and-hafez-celebrating-200-years-of-west-eastern-divan/" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Mar 2019</div><div class="t-body"><h4>Hypercube Ensemble / IFCA</h4><div class="piece">Heaven Has No Other Prayer Niche but Love</div><div class="venue">Roulette, Brooklyn, New York</div><a class="evlink" href="https://roulette.org/assets/040319_IFCAandHypercube_PreviewFeature.pdf" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Mar 2019</div><div class="t-body"><h4>Hypercube Ensemble / IFCA</h4><div class="piece">Heaven Has No Other Prayer Niche but Love</div><div class="venue">Kennedy Center, Washington DC</div><a class="evlink" href="https://www.hypercubemusic.org/events-1.html" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Oct 2018</div><div class="t-body"><h4>Babylon Orchestra</h4><div class="piece">Chasing the Wind</div><div class="venue">HAU1, Berlin, Germany</div><a class="evlink" href="https://www.hebbel-am-ufer.de/en/programme/pdetail/babylon-orchestra" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Oct 2018</div><div class="t-body"><h4>Emruze</h4><div class="piece">The Little Sparrow, Ashi Mashi</div><div class="venue">Koninklijk Conservatorium, Antwerp, Belgium</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Oct 2018</div><div class="t-body"><h4>HaftCraft Ensemble</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">Wallonie Festival, La Louvière, Belgium</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">Concertstudio Kortrijk, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details ↗</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">CdeSingel, Antwerp, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details ↗</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">Het Kanaal, Wijnegem, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details ↗</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>IFCA — Iranian Female Composers Association</h4><div class="piece">And the Moses Drowned</div><div class="venue">National Sawdust, New York, USA</div><a class="evlink" href="https://newyorkmusicdaily.wordpress.com/tag/live-music-new-york-april/" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">Concertstudio Kortrijk, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">CdeSingel, Antwerp, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>Hermes Ensemble</h4><div class="piece">Fight &amp; Feast</div><div class="venue">Het Kanaal, Wijnegem, Belgium</div><a class="evlink" href="https://hermesensemble.be/en/productions/emruz/" target="_blank" rel="noopener">Event Details</a> <a class="evlink" href="https://creationmusicale.be/fr/agenda/emruz-jean-luc-fafchamps" target="_blank" rel="noopener">More</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>IFCA — Iranian Female Composers Association</h4><div class="piece">And the Moses Drowned</div><div class="venue">National Sawdust, New York, USA</div><a class="evlink" href="https://newyorkmusicdaily.wordpress.com/tag/live-music-new-york-april/" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2018</div><div class="t-body"><h4>HaftCraft Ensemble — China Tour</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">Dubbelfagot, China</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Mar 2018</div><div class="t-body"><h4>The Newport String Project</h4><div class="piece">Faghan</div><div class="venue">Newport Art Museum, Newport, USA</div><a class="evlink" href="https://www.newportstringproject.org/blog/5w6al7w6jrhdmzmnyk5zaesr5mfz5h" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Mar 2018</div><div class="t-body"><h4>The Newport String Project</h4><div class="piece">Faghan</div><div class="venue">Newport Art Museum, Newport, USA</div><a class="evlink" href="https://www.newportstringproject.org/blog/5w6al7w6jrhdmzmnyk5zaesr5mfz5h" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Oct 2017</div><div class="t-body"><h4>HaftCraft Ensemble</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">Amuz Music Center, Antwerp, Belgium</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Oct 2017</div><div class="t-body"><h4>Heidelberg Music Festival</h4><div class="piece">And the Moses Drowned</div><div class="venue">Heidelberg, Germany</div><a class="evlink" href="https://www.heidelberger-fruehling.de/wp-content/uploads/2017/10/HDF_PB2018_200x270_170907_RZ_Ansicht_40dpi_minimum.pdf" target="_blank" rel="noopener">Event Details ↗</a></div></div>
-      <div class="t-row collapsed"><div class="t-date">Oct 2017</div><div class="t-body"><h4>Heidelberg Music Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">Heidelberg, Germany</div><a class="evlink" href="https://www.heidelberger-fruehling.de/wp-content/uploads/2017/10/HDF_PB2018_200x270_170907_RZ_Ansicht_40dpi_minimum.pdf" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Oct 2017</div><div class="t-body"><h4>Heidelberg Music Festival</h4><div class="piece">And the Moses Drowned</div><div class="venue">Heidelberg, Germany</div><a class="evlink" href="https://www.heidelberger-fruehling.de/wp-content/uploads/2017/10/HDF_PB2018_200x270_170907_RZ_Ansicht_40dpi_minimum.pdf" target="_blank" rel="noopener">Event Details</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Oct 2017</div><div class="t-body"><h4>Heidelberg Music Festival</h4><div class="piece">Heart Snatcher</div><div class="venue">Heidelberg, Germany</div><a class="evlink" href="https://www.heidelberger-fruehling.de/wp-content/uploads/2017/10/HDF_PB2018_200x270_170907_RZ_Ansicht_40dpi_minimum.pdf" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2017</div><div class="t-body"><h4>HaftCraft Ensemble</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">Bozar Centre for Fine Arts, Brussels, Belgium</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2017</div><div class="t-body"><h4>HaftCraft Ensemble</h4><div class="piece">This Is Crime · The Little Black Fish</div><div class="venue">Brosella, Brussels, Belgium</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Mar 2017</div><div class="t-body"><h4>Hinter dem Horizont</h4><div class="piece">Persian Dances · Flight of a Captive</div><div class="venue">Fanny Hensel Saal, MDW University, Austria</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2016</div><div class="t-body"><h4>Contemporary Music Festival</h4><div class="piece">Flight of a Captive · World Creation</div><div class="venue">Roudaki Concert Hall, Tehran, Iran</div></div></div>
       <div class="t-row collapsed"><div class="t-date">May 2014</div><div class="t-body"><h4>Solo Guitar Recital</h4><div class="piece">Persian Dances</div><div class="venue">UNAM University, Mexico</div></div></div>
-      <div class="t-row collapsed"><div class="t-date">Apr 2014</div><div class="t-body"><h4>Yogyakarta Contemporary Music Festival</h4><div class="piece">Faghan</div><div class="venue">Yogyakarta, Indonesia</div><a class="evlink" href="https://ainolnaim.wordpress.com/wp-content/uploads/2014/11/jadwal-konser-full-eng1.pdf" target="_blank" rel="noopener">Event Details ↗</a></div></div>
+      <div class="t-row collapsed"><div class="t-date">Apr 2014</div><div class="t-body"><h4>Yogyakarta Contemporary Music Festival</h4><div class="piece">Faghan</div><div class="venue">Yogyakarta, Indonesia</div><a class="evlink" href="https://ainolnaim.wordpress.com/wp-content/uploads/2014/11/jadwal-konser-full-eng1.pdf" target="_blank" rel="noopener">Event Details</a></div></div>
       <div class="t-row collapsed"><div class="t-date">Apr 2014</div><div class="t-body"><h4>NOB Ensemble</h4><div class="piece">The Little Black Fish</div><div class="venue">Brussels, Belgium</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Mar 2014</div><div class="t-body"><h4>International Women's Day</h4><div class="piece">String Quartet No. 1</div><div class="venue">Austria Embassy (OKF), Tehran, Iran</div></div></div>
       <div class="t-row collapsed"><div class="t-date">Mar 2014</div><div class="t-body"><h4>Concert</h4><div class="piece">Concerto for Clarinet · Persian Frame · Old Friend</div><div class="venue">Campus Lemmensinstituut, LUCA Brussels, Belgium</div></div></div>
@@ -1710,27 +1716,27 @@
       <div class="press-item">
         <div class="src">music/Maker Podcast with Tyler Kline · October 2024</div>
         <p>A conversation on musical imagination and artistic responsibility, episode 26.</p>
-        <a href="https://mahdisgolzarkashani.com/podcast" target="_blank" rel="noopener">Listen ↗</a>
+        <a href="https://mahdisgolzarkashani.com/podcast" target="_blank" rel="noopener">Listen</a>
       </div>
       <div class="press-item">
         <div class="src">Music Web International · December 2023</div>
         <p>Reviewing <em>And the Moses Drowned</em>, Glyn Pursglove described the string quartet — dedicated to children lost in the Syrian war — as a deeply affecting work, calling it a memorable piece both for its compositional skill and its emotional weight.</p>
-        <a href="https://musicwebinternational.com/2023/12/sirventes-chamber-music-new-focus/" target="_blank" rel="noopener">Read More ↗</a>
+        <a href="https://musicwebinternational.com/2023/12/sirventes-chamber-music-new-focus/" target="_blank" rel="noopener">Read More</a>
       </div>
       <div class="press-item">
         <div class="src">Church Times · November 2023</div>
         <p>Roderic Dunnett singled out <em>The Phoenix</em> at the Oxford International Song Festival, noting how the piece set Persian poetry within a distinctly Persian sound world — shurangiz alongside cello — for a haunting effect.</p>
-        <a href="https://www.churchtimes.co.uk/articles/2023/10-november/books-arts/music/music-review-oxford-international-song-festival-the-phoenix" target="_blank" rel="noopener">Read More ↗</a>
+        <a href="https://www.churchtimes.co.uk/articles/2023/10-november/books-arts/music/music-review-oxford-international-song-festival-the-phoenix" target="_blank" rel="noopener">Read More</a>
       </div>
       <div class="press-item">
         <div class="src">Opera Today · October 2023</div>
         <p>Claire Seymour previewed <em>The Phoenix</em>, a song cycle inspired by Beethoven's <em>An die ferne Geliebte</em> setting Hafez, Rumi, and Saadi, noting its blend of European and Iranian classical traditions with improvisation on traditional Persian instruments.</p>
-        <a href="https://operatoday.com/2023/10/the-glass-eye-hugh-cutting-sings-a-new-song-cycle-by-alex-ho-at-the-oxford-international-song-festival/" target="_blank" rel="noopener">Read More ↗</a>
+        <a href="https://operatoday.com/2023/10/the-glass-eye-hugh-cutting-sings-a-new-song-cycle-by-alex-ho-at-the-oxford-international-song-festival/" target="_blank" rel="noopener">Read More</a>
       </div>
       <div class="press-item">
         <div class="src">I Care If You Listen · April 2023</div>
         <p>Sofia Rocha highlighted <em>And the Moses Drowned</em> as the opening track of the IFCA album, praising its shift from grief-stricken opening chords into a searching, rhythmically vigorous climax.</p>
-        <a href="https://icareifyoulisten.com/2023/04/new-album-iranian-female-composers-association-brings-light-distinguished-middle-eastern-voices/" target="_blank" rel="noopener">Read More ↗</a>
+        <a href="https://icareifyoulisten.com/2023/04/new-album-iranian-female-composers-association-brings-light-distinguished-middle-eastern-voices/" target="_blank" rel="noopener">Read More</a>
       </div>
     </div>
 
@@ -1794,12 +1800,6 @@
 
 <footer>
   <div class="wrap">
-    <div class="fsocial" id="footerSocial">
-      <a href="https://www.instagram.com/mahdis.golzarkashani" target="_blank" rel="noopener" data-network="Instagram">Instagram</a>
-      <a href="https://www.youtube.com/@mahdisgolzarkashani9485" target="_blank" rel="noopener" data-network="YouTube">YouTube</a>
-      <a href="https://www.linkedin.com/in/mahdis-golzar-kashani-b0562586/" target="_blank" rel="noopener" data-network="LinkedIn">LinkedIn</a>
-      <a href="https://www.facebook.com/mahdis.kashani" target="_blank" rel="noopener" data-network="Facebook">Facebook</a>
-    </div>
     <div class="copy">© 2026 Mahdis Golzar Kashani · All Rights Reserved</div>
     <a href="#" class="admin-link" id="adminTrigger">⚙ Site Manager</a>
   </div>
@@ -2217,7 +2217,7 @@ function renderFrontendAlbums(){
       <h4>${al.title}</h4>
       <div class="role">${al.role || ''}</div>
       <div class="label">${al.label || ''}</div>
-      ${al.link ? `<a class="listen" href="${al.link}" target="_blank" rel="noopener">Listen ↗</a>` : ''}
+      ${al.link ? `<a class="listen" href="${al.link}" target="_blank" rel="noopener">Listen</a>` : ''}
     </div>
   `).join('');
 }
